@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<style type="text/css">
+	
+	p{
+		border: 1px solid red;
+	}
+</style>
+
+<script type="text/javascript">
+
+	function addAppend() {
+		var fieldset = document.getElementById("addele");
+		var p = document.createElement("p");
+		/*
+		//1.
+		var txt = document.createTextNode("자식태그들 중 가장 마지막에 추가");
+		p.appendChild(txt);
+		*/
+		
+		// 2.
+		p.textContent = "자식태그들 중 가장 마지막에 추가";
+		
+		fieldset.appendChild(p);										//마지막 div태그 밑으로 p태그 생성 append하면 마지막 형제 동생으로 계속 추가
+	}
+	
+	var count = 1;
+	
+	function addBefore() {
+		var p = document.createElement("p");
+		var fieldset = document.getElementById("addele");
+		
+		p.textContent = "엘리먼트의 앞에 추가 (" + (count++) + ")";
+		
+		var div = document.querySelector("#addele > div");
+		fieldset.insertBefore(p, div);									// fieldset -> legend , div 있는데 div 바로 앞에 계속해서 p생성
+	}
+	
+	function moveElement() {
+		var move = document.querySelector("fieldset").children[1];			// legend와 바로 옆에 있는 fieldset의 자식들을 계속 선택 그래서 div태그도 선택됨
+		var body = document.body;											// body 태그를 가져와서
+		body.appendChild(move);												// 그 선택한 자식을 body의 마지막 자식으로 이동시켜준다. 이동의 개념.
+	}
+	
+</script>
+</head>
+<body>
+
+	<h1>태그 추가하기</h1>
+	<button onclick="addAppend();">appendChild()</button>
+	<button onclick="addBefore();">insertBefore()</button>
+	<button onclick="moveElement()">appendChild를 이용한 엘리먼트 이동</button>
+
+	<fieldset id="addele">
+		<legend>부모태그</legend>
+		<div>div태그</div>
+	</fieldset>
+
+</body>
+</html>

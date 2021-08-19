@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>js22</title>
+
+<script type="text/javascript">
+	function tableVal(){															// 추가 버튼 클릭시 실행
+		var doc = document.forms[0];		//node=<form>가져올꺼					// document.forms[인덱스번호]로 해당 폼을 선택할 수 있음.
+		//alert(document.forms.length);												// form이 몇개가 있는지 확인 할 수 있음
+		var vals = [doc.id.value, doc.pw.value, doc.addr.value, doc.phone.value];	// vals변수에 입력한 name이 id, pw, addr, phone들이 가지고 있는 value값을 가져와서 배열상태로 저장
+					//form.name.value 형식으로 전달된다 이거 진짜 중요 form에서 name과 value 진짜 중요하다!!!!!!
+		for(var i = 0; i < vals.length; i++){										// 입력한 배열의 크기만큼, 4번
+			if(vals[i] == null || vals[i].trim()=="" || vals[i]==undefined){		// 유효성 검사, 만약 입력하지 않은 것이 있다면 
+			   //null값이거나  || 공백이거나  || 정의되지 않았다면	.trim은 스페이스바 공백 걸러주기 위해
+				alert("모두 다 입력해 주세요!!");									// alert로 모두 다 입력하라는 경고창을 띄워주고
+				return;																// 함수 자체를 종료 // 입력 상태로 리턴
+			}
+		}
+		
+		document.getElementById("addtr").appendChild(createRow(vals));				// 일단 24번 줄로 가. 받은 tr을 id=addtr인 tbody에 새로운 하나의 tr로 append해준다.
+	}
+
+	function createRow(vals){														// 자식 로우를 생성하려고 할 때 함수 실행
+		var tr = document.createElement("tr");										// tr태그 생성	1개 생성
+		//<tr></tr>
+		
+		for(var i = 0;i<vals.length;i++){											// vals길이 4만큼 반복문
+			var td = document.createElement("td");									// td태그를 생성 총 4개 생성한다.
+			//<td></td>
+			//<td></td>
+			//<td></td>
+			//<td></td>
+			td.textContent=vals[i];													// 생성된 td태그에 id=~, pw=~, addr=~, phone=~ 반복하며 넣는다.
+			//<td>id</td>
+			//<td>pw</td>
+			//<td>addr</td>
+			//<td>phone</td>
+			tr.appendChild(td);														// for문 전에 만들어 놨던 빈tr에 데이터를 넣은 td를 넣는다.
+			//<tr><td>id</td>pw</td><td>addr</td><td>phone</td><tr>
+		}																			// 한 tr에 4개의 td가 append될 것이다. 한 줄의 완벽한 row가 생김
+		var dTd = document.createElement("td");										// dtd라는 td태그 하나를 생성해준다.
+		// <td></td>
+		dTd.innerHTML="<input type='button' value='삭제' onclick='delRow(this)'>";	// 이 dtd를 만든 이유는 데이터를 추가했을 때 마지막 열의 삭제칸에 버튼을 생성해주기 위해서			//onclick에 delRow(this)는 자기 자신을 넘겨주겠다.
+		// <td><input type='button' value='삭제' onclick='delRow(this)'></td>
+		tr.appendChild(dTd);														// 이 dtd를 방금 완성됬던 tr에 추가시켜준다.
+		//<tr>
+		//	<td>id</td>
+		//	<td>pw</td>
+		//	<td>addr</td>
+		//	<td>phone</td>
+		//	<td><input type='button' value='삭제' onclick='delRow(this)'></td>
+		//<tr>
+		return tr;																	// 이 tr을 리턴해준다 21번 줄로 올라가~
+	}
+
+	function deleteVal(){															// (전체)삭제 버튼 누르면 실행
+		var tbody = document.getElementById("addtr");								// id="addtr"를 가진 tbody태그를 담는다.
+		while(tbody.hasChildNodes()) { 												// hashCildNodes()는 현재노드(tbody)에게 자식노드가 있는지를 boolean값으로 반환, tr,td들이 있으면 참!
+			tbody.removeChild(tbody.lastChild ); 									// 참이면 body.lastchild로 마지막 자식을 반환해서 remove로 제거하는것을 while문으로 반복하고 전체 삭제되면 빠져나옴.
+		} 
+
+	}
+	
+	function delRow(ele){	//자기자신을 받음, <td><input></td> input태그를 받는다!!!!
+		//<tr>
+		//	<td>id</td>
+		//	<td>pw</td>
+		//	<td>addr</td>
+		//	<td>phone</td>
+		//	<td><input type='button' value='삭제' onclick='delRow(this)'></td>
+		//<tr>
+		var delTr = ele.parentNode.parentNode;																																			//tr이 반환되서 delTr에 담아줌
+		var tbody = document.getElementById("addtr");																																	//tbody 전체를 불러옴
+		tbody.removeChild(delTr);																																						//tbody 전체에서 방금 가져온 한개의 tr을 삭제
+	}
+
+</script>
+
+
+</head>
+<body>
+
+	<form>	<!-- form이 중요한 것은 <form action="경로" method="post"처럼 내용을 전달하려고 쓴다.   -->
+		<table id="intable">												<!-- 데이터들을 입력할 table -->
+			<tr>															<!-- 첫번째 줄 -->
+			<td>아이디:</td>												
+				<td><input type="text" name="id"/></td>						<!-- 아이디 : 입력 -->
+			</tr>
+			<tr>															<!-- 두번째 줄 -->
+				<td>비밀번호:</td>
+				<td><input type="text" name="pw"/></td>						<!-- 비밀번호 : 입력 -->
+			</tr>
+			<tr>															<!-- 세번째 줄 -->
+				<td>주소:</td>
+			<td><input type="text" name="addr"/></td>						<!-- 주소 : 입력 -->
+			</tr>
+			<tr>															<!-- 네번째 줄 -->
+				<td>전화번호:</td>
+				<td><input type="text" name="phone"/></td>					<!-- 전화번호 : 입력 -->
+			</tr>
+		</table>
+		<input type="button" value="추가" onclick="tableVal();" />			<!-- 추가 버튼 -->
+		<input type="button" value="삭제" onclick="deleteVal();" />			<!-- 삭제 버튼 -->
+	</form>
+	
+	<div id="addtable">
+		<table border="1" id="ctb">											<!-- 추가한 데이터를 출력할 table -->
+			<col width="100px"/>											<!-- 각 열의 크기 -->
+			<col width="100px"/>
+			<col width="300px"/>
+			<col width="200px"/>
+			<col width="100px"/>
+			<thead>															<!-- 테이블의 head 요소를 정의, 한 줄로 여러개의 컬럼을 set. -->
+				<tr>														<!-- 한 줄에다 표현하니깐 tr하나 들어가주고 -->
+					<th>아이디</th>
+					<th>비밀번호</th>
+					<th>주소</th>
+					<th>전화번호</th>
+					<th>삭제</th>
+				</tr>
+			</thead>														<!-- thead를 사용한 경우 반드시 그 뒤에 tbody가 위치해야한다. 당연 표 만들어야지 -->
+			<tbody id="addtr">												<!-- tbody태그는 여러 th와 td를 묶어서 행으로 만들고 그 행을 여러행으로 묶어 표의 본문을 구성한다. -->
+			</tbody>
+		</table>
+	</div>
+	
+	
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

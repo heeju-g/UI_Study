@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	//1.명시적함수
+	function func01(){
+		// ; : 생략가능하지만 한줄에 여러 명령으 사용하는 경우엔 생략 불가
+		alert("명시적함수");
+		alert("이름이 있는 함수")
+	}
+	//2.익명함수
+	var func02 = function(i){
+		alert("익명함수 - 이름이 없는 함수" + i);
+	}
+	//3.리터럴함수(함수리터럴)
+	function literalPrn(myliteral){
+		myliteral("안녕하세요, 리터럴입니다");
+	}
+	//리터럴 prn호출했는데 그 안에 파라미터(myliteral) 있음. 그거 실행하는데 전달된 함수에 아규먼트 값(msg)있으니까 그거 넣어서 실행. 안녕하세요가 msg로 들어감
+	function func03(){
+		literalPrn(function(msg){
+			alert(msg);}
+		);
+	}
+	function valTest(){
+		// arguments : 전달된 값(arguments)들을 배열형태로 저장하는 객체
+		var msg = "qclass";
+		for(var i =0; i< arguments.length; i++){
+			msg+= arguments[i]+" ";
+		}
+		alert(msg);
+	}
+	//closure : 내부함수(자식)가 외부함수(부모)의 변수(val,msg), 파라미터 등에 접근 가능
+	function closureTest(val){
+		var msg = "!!!";
+		function addVal(){
+			alert(val+msg);
+		}
+		return addVal;
+	}
+	var amEdu=clusureTest('Servlet');
+	function pmEdu(val){
+	//위에서 closureTest는 리턴값있으므로 closureTest(val)은 함숫값(addVal)으로 리턴되므로 이걸 실행하려면 ()뒤에 붙여줘야 하는 것
+		closureTest(val)();
+	// var tmp = clusureTest(val);
+	// tmp();
+	}
+
+	
+</script>
+</head>
+<body>
+	<h1>함수</h1>
+	<h2>함수의 종류</h2>
+	<p onclick="func01()">1.명시적함수</p>
+	<p onclick="func02(100)">2.익명함수</p>
+	<p onclick="func03()">3.리터럴함수(함수리터럴)</p>
+	<h2 onclick="valTest('멋쟁이','짱')">args(arguments)속성</h2>
+	<h2>클로저(내부함수)</h2>
+	<label for="am">오전강의</label>
+	<input type="text" id="am"/>
+	<input type="button" value="클릭" onclick="amEdu();">
+	
+	<hr/>
+	<label for="pm">오후강의</label>
+	<input type="text" id="pm"/>
+	<input type="button" value="클릭" onclick="pmEdu(pm.value);"/>
+	
+</body>
+</html>

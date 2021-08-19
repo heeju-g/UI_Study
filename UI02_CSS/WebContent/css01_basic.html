@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- <link href="resources/css/style.css" rel="stylesheet" type="text/css"/> -->
+<!-- href는 파일경로 rel은 연결대상의 속성 tpe은 해당 파일의 정보값 -->
+<style type="text/css">
+/*
+외부의 css를 가지고 오는 방법은, 
+link태그 사용하던가 style태그 내에서 @import 사용하던가
+*/
+	@import url("resources/css/style.css");
+	p{
+		background-color: gold;
+	}
+</style>
+</head>
+<body>
+	<h1>css기본문법</h1>
+	
+	<h3>작성방식 3가지</h3>
+	<b style="color: pink;">1.인라인 스타일시트 : 우선순위가 높다</b>
+	<p>
+		<span>2.내부 스타일시트 : html내부에서 간단히 작성</span>
+		<br>
+		<b>3.외부 스타일시트 : *css파일을 생성 (가장 많이 사용)</b>
+	</p>
+</body>
+</html>

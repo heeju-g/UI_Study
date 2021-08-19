@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function searchId(){
+		var doc = document.getElementById("test");
+		doc.innerHTML= "id로 탐색";
+		doc.style.color="red";
+	}
+	function searchName(){
+		//node list
+		var doc = document.getElementsByName("test02");
+		doc[1].value="name속성으로 탐색";
+	}
+	function searchTagName(){
+		var doc = document.getElementsByTagName("p");
+		doc[3].innerHTML = "tagName으로 탐색";
+		doc[3].style.color = "blue";
+	}
+	function searchQs(){
+		//var doc = document.querySelectorAll("#test");
+		//doc[0].innerHTML = "querySelectorAll(css선택자)";
+		var doc = document.querySelector("#test");
+		doc.innerHTML = "querySelector(css선택자)";
+	}
+
+</script>
+</head>
+<body>
+	<p onclick="searchQs();">DOM탐색 메서드</p>
+	<p id="test" onclick="searchId();">1.엘리먼트의 id로 탐색 - 리턴 : 값 하나</p>
+	<p onclick="searchName();">
+		2. 엘리먼트의 name으로 탐색 - 리턴 : 배열(node list)<br>
+		<input type="text" name="test02" value=""/><br>
+		<input type="text" name="test02" value=""/><br>
+		<input type="text" name="test02" value=""/><br>
+	</p>
+	<p onclick="searchTagName();">3.엘리먼트의 태그이름으로 탐색 - 리턴: 배열(node list)</p>
+	
+</body>
+</html>

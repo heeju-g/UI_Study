@@ -1,0 +1,102 @@
+/* 타입선택자 */
+pre{
+	text-align: center;
+	
+}
+h1{
+	color: skyblue;
+	
+}
+/*id선택자*/
+#side01{
+	color: red;
+	
+}
+#side02{
+	background-color: blue;
+	color: white;
+}
+#side03{
+	color: green;
+}
+/* class 선택자*/
+.scls{
+	color : silver;
+}
+/* 전체 선책자 */
+*{
+	padding: 0;
+	margin : 0;
+	font-variant: small-caps;
+}
+/* 자식 선택자 */
+#at > p{
+	color: red;
+}
+#at > div > p{
+	color: blue;
+}
+/* 하위선택자 */
+div span{
+	background-color: yellow;
+}
+/* 인접 선택자 */
+h3 + b{
+	background-color: grey;
+	color: ghostwhite;
+}
+span + b{
+	color: fuchsia;
+}
+/*속성 선택자*/
+p[title]{
+	background-color: yellow;
+}
+p[title="b"]{
+	color: green;
+}
+/* 가상클래스 선택자 */
+a:link{
+	color: green;
+	font-size:30pt;
+}
+a:visited{
+	color: orange;
+}
+a:hover{
+	background-color: skyblue;
+	font-size: 40pt;
+}
+a:active{
+	background-color: lime;
+	color: black;
+
+}
+input:checked{
+	width:100px;
+	height: 100px;
+}
+/*종속 선택자*/
+li.scls01{
+	background-color: purple;
+}
+li.scls02#sidul{
+	font-size:20px;
+	font-weight: bold;
+}
+/*그룹 선택자 */
+p,pre,strong{
+	color: teal;
+}
+
+
+
+
+
+
+
+
+
+
+
+

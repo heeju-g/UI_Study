@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div,p{
+		width: 200px;
+		height: 200px;
+		border: 1px solid red;
+	}
+	#bgsize{
+		background: url("resources/image/kakaocon.png");
+		background-size: contain;
+	}
+	#multibg{
+		background-image: url(resources/image/img01.png), url("resources/image/kakaocon");
+		background-size: contain;
+	}
+	@font-face{
+		font-family: "Goyang";
+		src: url("resources/Goyang.ttf") format("truetype");
+	}
+	#goyang{
+		font-family: "Goyang";
+		font-size: 30px;
+	}
+</style>
+</head>
+<body>
+	<h1>background-size</h1>
+	<div id="bgsize">background-size</div>
+	<h1>multi=background</h1>
+	<div id="multibg">multi-background</div>
+	<h1>font-face</h1>
+	<div id="goyang">
+	고양시 고양체
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	img{
+		width: 150px;
+		height: 150px;
+		float: left;
+	}
+	#menubox{
+		position: relative;
+	}
+	#menu{
+		overflow: auto;
+	}
+	.sel{
+		width: 140px;
+		height: 140px;
+		border: 5px dotted red;
+		position: absolute;
+		left: 300px;
+	}
+	button{
+		width: 150px;
+		height: 50px;
+		margin-left: 300px;
+	}
+</style>
+
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+	$(function(){
+		//setInterval : 일정 시간 간격으로 해당 함수를 반복 0.05초
+		setInterval(function(){
+			var div = $("#menu");
+			//appendTo : div의 자식요소 중 마지막에 넣어준다 source.appendTo(target);
+			//append는 target.append(); div의 자식요소 중 마지막에 넣어준다 (결과는 둘이 같음)
+			//class가 active인 애들 중 첫번째를 id가 menu인 곳에 넣어준다.
+			//추가가 아니라 이동이다(<>이런식으로 안해줘서)
+			//버튼을 또 누르면 토글클래스로 active사라지니까 멈주는걸로 보여지는 것.함수 자체는 돌고 있다
+			$(".active").first().appendTo(div);
+		},50);
+		$("button").click(function(){
+			//button클릭 시, 모든 img에 active라는 class가 생성되거나 사라진다.
+			$("img").toggleClass("active");
+			//button의 text가 start라면, 클릭 시 stop으로 해주고/ 아니라면 start로 
+			if($("button").text()== "start"){
+				$("button").text("stop");
+			}else{
+				$("button").text("start");
+			}
+		});
+	});
+</script>
+
+</head>
+<body>
+	
+	<h1>777</h1>
+	<div id="menubox">
+		<div class="sel"></div>
+		<div id ="menu">
+			<img alt="img01" src="resources/image/img01.png"/>
+			<img alt="img02" src="resources/image/img02.png"/>
+			<img alt="img03" src="resources/image/img03.png"/>
+			<img alt="img04" src="resources/image/img04.png"/>
+			<img alt="img05" src="resources/image/img05.png"/>
+		</div>
+	</div>
+	<button>start</button>
+</body>
+</html>

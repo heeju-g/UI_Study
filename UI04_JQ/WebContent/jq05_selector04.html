@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		//.submit: form태그 안에서 submit이벤트가 발생했을떄 실행됨
+		$("#signal").submit(function() {
+					if ($(".infobox").val() == null
+							|| $(".infobox").val().trim() == "") {
+						$(".error").show();
+						return false;
+					}
+
+				});
+		$("#confirm").click(function() {
+			//.empty(); : 해당 태그안의 자식요소들 지우기
+			$("#result").empty();
+			//name이 chk인 애가 체크된 애들 길이가 0 : 하나도 선택안됐다
+			if ($("input[name=chk]:checked").length == 0) {
+				alert("하나이상 체크하세요")
+			} else {
+				var total = 0;
+				//선택된 애들만 가지고(node list로 오면), 0번지 가져와서 아래 함수를 실행, 1번지 가져와서 실행,,반복
+				$("input[name=chk]:checked").each(function(i) {
+					var chk = $("input[name=chk]:checked").eq(i);
+					//next : chk의 다음 형제태그(같은 부모를 가진)를 가져와라. 걔가 가진 text가져와라(java, db,,)
+					var book = chk.next().text();
+					//체크된 애의 value(40000,35000,,)
+					var price = chk.val();
+					$("#result").append(book + "(" + price + ")<br>");
+					//문자열이니까 숫자로 바꿔주고
+					total += parseInt(price);
+				})
+				$("#result").append("총합 : " + total);
+			}
+
+		});
+		//---
+		$("input[name=chk]").click(function(){
+			if($("input[name=chk]").length == $("input[name=chk]:checked").length){
+				
+					$("input[name=all]").prop("checked",true);
+				
+			}else{
+				$("input[name=all]").prop("checked",false);
+			}
+		});
+
+	});
+	/*
+		엘리먼트의 속성값을 사용
+		
+		-html tag의 속성
+		.attr("attributrName")  
+		.attr("attributrName", "value")
+		아래 allcheck에서 prop을 attr로 바꿔도 처음 실행은 되지만, 체크했던걸 다시 풀고 체크하는게 안된다. html은 정적인 문서이기 때문
+		
+		-javascript tag의 속성(property)
+		얘는 javascript객체를 가지고 값을 바꾸는 거라서 계속 체크했다 풀고 할 수 있다.
+		.prop("propertyName")
+		.prop("proprtyName", "value")
+	 */
+	function allCheck(bool) {
+		$("input[name=chk]").each(function() {
+			$(this).prop("checked", bool);
+		});
+	}
+</script>
+</head>
+<body>
+	<form action="" id="signal" method="get">
+		<div>
+			<span class="label">User ID</span> <input type="text" class="infobox"
+				name="userid" /> <span class="error" hidden="" style="color: red;">반드시
+				입력하세요</span>
+
+		</div>
+		<input type="submit" class="submit" value="입력" />
+	</form>
+	<hr>
+	<fieldset style="width: 300px">
+		<legend>체크</legend>
+		<input type="checkbox" name="all" onclick="allCheck(this.checked);" />전체선택<br>
+		<input type="checkbox" name="chk" value="40000" /><b>java</b><br>
+		<input type="checkbox" name="chk" value="35000" /><b>db</b><br> <input
+			type="checkbox" name="chk" value="30000" /><b>javascript</b><br>
+
+		<input type="button" value="확인" id="confirm" /> <br> <span>선택한
+			책의 총 가격</span>
+		<div id="result"></div>
+
+	</fieldset>
+
+</body>
+</html>

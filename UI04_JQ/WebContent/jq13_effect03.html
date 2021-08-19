@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	.main_menu{
+		width: 300px;
+	}
+	.sub_menu1{
+		cursor: pointer;
+	}
+	.sub_menu2{
+		display: none;
+		cursor: default;
+	}
+</style>
+<script type="text/javascript" src="resources/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("b").click(function(){
+			//$(this).next().slideToggle();
+			//밑에 다른애들도 다 나오면 안되니까 부모(sub_menu1태그가진 li)의 형제들 찾아서 slideUp해서 숨겨주는 것
+			//$(this).parent().siblings().find("ul").slideUp();
+			
+			//end()하면 끝내고 처음(this)로 돌아가서 뒤에 이어 다른 명령 또 내릴 수 있음
+			$(this).next().slideToggle().end().parent().siblings().find("ul").slideUp();
+		});
+	});
+</script>
+</head>
+<body>
+
+	<p>메뉴 만들기</p>
+	<ul type="square" class="main_menu" >
+		<li class="sub_menu1"><b>(1)css 선택자</b>
+			<ul type="circle" class="sub_menu2">
+				<li>tag로 선택</li>
+				<li>id로 선택</li>
+				<li>class로 선택</li>
+				<li>parent child로 선택</li>
+				<li>parent%gt;child로 선택</li>
+				<li>:nth-child로 선택</li>
+				<li>:first-child로 선택</li>
+				<li>:last-child로 선택</li>
+			</ul>
+		</li>
+		<li class="sub_menu1"><b>(2)속성 선택자</b>
+			<ul type="circle" class="sub_menu2">
+				<li>[attr]</li>
+				<li>[attr-value]</li>
+				<li>[attr!=value]</li>
+			</ul>
+		</li>
+		<li class="sub_menu1"><b>(3)폼선택자</b>
+			<ul type="circle" class="sub_menu2">
+				<li>input:type</li>
+			</ul>
+		</li>
+		<li class="sub_menu1"><b>(4)사용자 정의 선택자</b>
+			<ul type="circle" class="sub_menu2">
+				<li>:eq(n)</li>
+				<li>:first</li>
+				<li>:last</li>
+				<li>:even</li>
+				<li>:odd</li>
+				<li>:parent</li>
+			</ul>
+		</li>	
+	</ul>
+	
+</body>
+</html>

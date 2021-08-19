@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link  href="resources/css/style.css" rel="stylesheet" type="text/css" />
+<style>
+h1{
+	background-color: pink;
+}
+#a{
+	color:red;
+}
+.b{
+	color: blue;
+}
+*{
+	padding: 0px;
+}
+p > strong{
+	color:orange;
+}
+#c+p{
+	color:green;
+}
+p[title]{
+	font-size:20pt;
+}
+
+	
+</style>
+</head>
+<body>
+	<h1>셀렉터 연습</h1>
+	<div>
+		<p>1. h1태그에 배경색 핑크. 2.id="a"에 컬러 레드 3. class="b"에 컬러 블루 4. 전체선택해서 padding:0px</p>
+	</div>
+	<div>
+		<p>5. p태그의 <strong>자식요소</strong>중 strong태그에 컬러오렌지 적용.</p>
+		<p id="c">6. id가 c인 속성을 가진 p태그에 인접한 p태그에 <b>color:green</b>적용</p>
+		<p>"id가 c인 속성가진 p태그"에 인접한 p태그</p>
+		<p title="mytt">7.title 속성가진 p태그에 <b>font-size: 20pt</b>적용</p>
+	</div>
+</body>
+</html>

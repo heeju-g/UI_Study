@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>윈도우 연습01</title>
+
+<style type="text/css">
+	#regist {
+		border: 1px solid black;
+		background: pink;
+		position: absolute;
+		top: 200px;
+		left: 500px;
+		/*아직 여기서 안만들고 이따 만들거야*/
+		display: none;
+		
+	}
+</style>
+<!-- display : none //공간 차지하지 않음(만들어지지 않은 상태)
+	visibility : hidden //공간을 차지한다(만들어져 있으나 보이지 않는 상태)
+	 -->
+
+<script type="text/javascript">
+	function openWin() {
+		var url = "js13_window02.html";
+		var title = "";
+		var prop = "top=200px,left=600px,width=500px,height=500px";
+		//새로 열 팝업창의 url, 제목, 속성을 지정해줬음
+		window.open(url, title, prop);
+	}
+
+	function registForm() {
+		// 블록요소로 잡아줄거다 만들거다, 위에서(#regist) 안만들었으니까
+		document.getElementById("regist").style.display = "block";
+		document.body.style.background = "gray";
+		// name이 btn인 것들(node list) 가져와서 i에 넣는다. i번지에 있는 애의 disabled속성을 disabled한다(회원가입창에 뭐 쓸거니까 다른 창들 disable해)
+		var btns = document.getElementsByName("btn");
+		for ( var i in btns) { //for in 문 (향상된 for문)
+		//	for(var i=0;i<btns.length;i++){
+			btns[i].disabled = "disabled";
+		}
+	}
+
+	function closeWin() {
+		//id가 regist인 애 닫기(none : 다시없애)
+		document.getElementById("regist").style.display = "none";
+		document.body.style.background = "white";
+		//btn인 애들 가지고 와서 걔네 disabled속성 없애라 버튼 클릭 가능하게
+		var btns = document.getElementsByName("btn");
+		for ( var i in btns) {
+			btns[i].disabled = "";
+		}
+	}
+
+	function idchk() {
+
+		//id 중복체크 하라고 하기
+		alert("중복체크를 확인하세요");
+	}
+
+	function idCheck() {
+		//해당 속성, url의 팝업창 열기(id중복체크창) . 
+		open("js13_window03.html", "", "width=300px,height=300px");
+	}
+</script>
+
+</head>
+<body>
+
+	<h1>window객체</h1>
+	
+	<pre>
+	프로퍼티
+	 -document
+	 -history
+	 -location
+	 -navigator
+	 -screen
+	 -frames
+	 -parent
+	 -top
+	 -self
+	메서드
+	 -alert()
+	 -confirm()
+	 -prompt()
+	 -back()
+	 -forward()
+	 -setInterval()
+	 -clearInterval()
+	 -setTimeout()
+	 -open()
+	 -close()
+	 -scroll(),scrollBy(), scrollTo() 
+	</pre>
+
+	<div id="f1">
+		<h1>팝업창 만들기</h1>	
+		<button onclick="openWin()" name="btn">창열기</button>
+		<hr>
+		<h1>회원가입하기(div팝업창)</h1>
+		<button onclick="registForm()" name="btn">회원가입</button>
+	</div>
+
+	<div id="regist">
+		<form>
+			<table>
+				<caption>회원가입</caption>
+				<tr>
+					<td>아이디</td>
+					<!--id에 뭐 넣으려고 하면 중복체크를 하라는 알림(idchk()), 실제 충복확인 하는 팝업창 띄우기(idCheck()) -->
+					<td><input type="text" name="id" onclick="idchk()" readonly="readonly" /> 
+					<input type="button" value="중복체크" onclick="idCheck()" /></td>
+				</tr>
+				<tr>
+					<td>패스워드</td>
+					<td><input type="password" name="pwd" alt="" style="color: red;" checked="checked" /></td>
+				</tr>
+				<tr>
+				<!--확인버튼 누르면 회원가입창 닫음 -->
+					<td colspan="2" align="center"><input type="button" value="확인" onclick="closeWin()" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<br/><br/><br/>
+	<iframe name="myframe"></iframe>
+
+</body>
+</html>
